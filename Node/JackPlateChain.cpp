@@ -44,6 +44,18 @@ void JackPlateChain::propogateAllActuators(float successiveTime){
   
 }
 
+
+void JackPlateChain::turnOnActuator(int actuatorNumber){
+	
+	//Checks if actuator has rested, then turns it on for TIME_ON before turning it off
+	if ((*this).hasRestTimeElapsed(actuatorNumber)){
+		digitalWrite(port_pin[initializedPort][actuatorNumber], HIGH);
+		delay(TIME_ON);
+		digitalWrite(port_pin[initializedPort][actuatorNumber], LOW);
+	}
+	
+}
+
 bool JackPlateChain::checkIRSensorActivated(int sensorNumber){
 
   sensorNumber += 3; //For proper pin mapping. I.E. First sensor plugged in is pin number 5 on the port. Pin number 5 has an index of 4.
@@ -77,4 +89,3 @@ bool JackPlateChain::hasRestTimeElapsed(int actuatorNumber){
   return false;
   
 }
-
