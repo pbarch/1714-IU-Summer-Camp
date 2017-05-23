@@ -8,6 +8,8 @@ void NodeComm::initComm(){
   pinMode(pins[FRONT][GND], OUTPUT);
   digitalWrite(pins[BACK][GND],LOW);
   digitalWrite(pins[FRONT][GND],LOW);
+
+  //Serial2.begin
 }
 
 int NodeComm::checkComm(int source){

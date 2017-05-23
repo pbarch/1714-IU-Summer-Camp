@@ -28,6 +28,9 @@ class NodeComm{
     int TX = 2;
     int pins[2][3] = {{p1_ground,p1_rx,p1_tx},{p2_ground, p2_rx, p2_tx}};
 
+    //SoftwareSerial backwardSerial(pins[BACK][RX], pins[BACK][TX]); 
+    //SoftwareSerial forwardSerial(pins[FRONT][RX], pins[FRONT][TX]);
+
     int checkComm(int source);
     void sendComm(int dest, int val);
 
