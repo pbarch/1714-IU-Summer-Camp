@@ -10,23 +10,23 @@
 
 NodeComm::NodeComm(){
 
-  pinMode(pins[BACK][GND], OUTPUT);
-  pinMode(pins[FRONT][GND], OUTPUT);
-  digitalWrite(pins[BACK][GND],LOW);
-  digitalWrite(pins[FRONT][GND],LOW);
+  pinMode(pins[BACKWARD][GND], OUTPUT);
+  pinMode(pins[FORWARD][GND], OUTPUT);
+  digitalWrite(pins[BACKWARD][GND],LOW);
+  digitalWrite(pins[FORWARD][GND],LOW);
 
   //Serial2.begin
   
 }
 
 int NodeComm::checkComm(int source){
-  // source: BACK or FRONT
+  // source: BACKWARD or FORWARD
   return digitalRead(pins[source][RX]);
   
 }
 
 void NodeComm::sendComm(int dest, int val){
-  // dest: BACK or FRONT
+  // dest: BACKWARD or FORWARD
   // val: HIGH or LOW
   digitalWrite(pins[dest][TX], val);
 }

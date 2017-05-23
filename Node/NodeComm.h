@@ -19,15 +19,12 @@ class NodeComm{
     int ledPin = 13;
 
     
-    int BACK = 1; //p2
-    int FRONT = 0; //p1
+    int BACKWARD = 1; //p2
+    int FORWARD = 0; //p1
     int GND = 0;
     int RX = 1;
     int TX = 2;
     int pins[2][3] = {{p1_ground,p1_rx,p1_tx},{p2_ground, p2_rx, p2_tx}};
-
-    //SoftwareSerial backwardSerial(pins[BACK][RX], pins[BACK][TX]); 
-    //SoftwareSerial forwardSerial(pins[FRONT][RX], pins[FRONT][TX]);
 
   public:
     NodeComm();
