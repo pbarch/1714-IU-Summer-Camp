@@ -22,7 +22,7 @@ NodeComm comms; // Initialize inter-node communication object
 void setup() {
 
   // Start serial communication for USB debugging
-  Serial.begin(57600);
+  Serial.begin(9600);
   Serial.println("Serial communication started");
   
 }
@@ -30,22 +30,28 @@ void setup() {
 // Code inside loop() repeats until the Teensy powers off
 void loop() {
 
+  //Check all IRSensors on Jack Plates for detection
   if (chain.checkIRSensorActivated(0) || chain.checkIRSensorActivated(1) || 
   chain.checkIRSensorActivated(2) || chain.checkIRSensorActivated(3))
   {
-    comms.sendComm(FORWARD, 1);
+    comms.sendComm(FORWARD, 1);   //Sends communication to Node connected to Port 1
     chain.propogateAllActuators(0);
-    comms.sendComm(FORWARD, 0);
+    comms.sendComm(FORWARD, 0);   //Terminates communciation
   }
+  //Checks for communication in port set by BACKWARD
   if (comms.checkComm(BACKWARD)){
+
+    //Waits for previousNode to complete propogateAllActuators
     delay(4000);
-    comms.sendComm(FORWARD, 1);
+    
+    comms.sendComm(FORWARD, 1);   //Sends communication to Node connected to Port 1
     chain.propogateAllActuators(0);
-    comms.sendComm(FORWARD, 0);
+    comms.sendComm(FORWARD, 0);   //Terminates communciation
+    
   }
 
-  // Uncomment below to use the sample loop
-  //sampleUsage();
+
+  //sampleUsage();    //Remove initial forward brackets (//) to use function
   
 }
 
