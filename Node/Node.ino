@@ -9,10 +9,13 @@
 #include "NodeComm.h"
 #include "JackPlateChain.h"
 
+// If the system is wired according to specification you will not need to change these
 #define FORWARD                 0     // Port connected to Node/Dendrite to send instructions to
 #define BACKWARD                1     // Port connected to Node/Dendrite to receive instructions from
-#define NumJackPlatesOnChain    1     // The number of jack plates chained together
 #define JackPlatePort           0     // The port in which the chain of jack plates is plugged into
+
+// change according to the number of Jack Plates in the chain
+#define NumJackPlatesOnChain    1     // The number of jack plates chained together
 
 JackPlateChain chain(JackPlatePort); // Initialize a chain of jack plates on port 0
 
