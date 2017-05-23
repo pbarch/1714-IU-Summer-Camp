@@ -44,10 +44,13 @@ void loop() {
     comms.sendComm(FORWARD, 0);
   }
 
+  // Uncomment below to use the sample loop
   //sampleUsage();
   
 }
 
+
+// Example usage of functions in JackPlateChain and NodeComm
 void sampleUsage(){
 
   // Loop through each plate
@@ -81,6 +84,7 @@ void sampleUsage(){
     Serial.println("Incoming LOW signal from previous node");
   }
 
+  // check for communication from the next node in the chain
   if (comms.checkComm(FORWARD) == HIGH){
     Serial.println("Incoming HIGH signal from next node");
   } else {
