@@ -1,15 +1,13 @@
-#if (ARDUINO >= 100)
- #include <Arduino.h>
-#else
- #include <WProgram.h>
- #include <pins_arduino.h>
-#endif
+/*
+ * NodeComm.h - Library for Simple Node to Node Communication via 8P Port
+ * Created By Adam Francey, May 19, 2017
+ * Released for IU Summer Camp
+ * Philip Beesley Architect Inc. / Living Architecture Systems Group
+ */
+
+#include <Arduino.h>
 
 class NodeComm{
-
-  public:
-    NodeComm();
-    void initComm();
 
     int transmitter = false;
     int p1_ground = 25;
@@ -31,8 +29,9 @@ class NodeComm{
     //SoftwareSerial backwardSerial(pins[BACK][RX], pins[BACK][TX]); 
     //SoftwareSerial forwardSerial(pins[FRONT][RX], pins[FRONT][TX]);
 
+  public:
+    NodeComm();
     int checkComm(int source);
     void sendComm(int dest, int val);
-
   
   };

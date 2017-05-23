@@ -2,6 +2,7 @@
  * JackPlateChain.h - Library for Daisy Chain Reaction for Dendrite
  * Created By Kevin Lam, May 19, 2017
  * Released for IU SummerCamp
+ * Philip Beesley Architect Inc. / Living Architecture Systems Group
  */
 
 #ifndef JackPlateChain_h

@@ -1,15 +1,22 @@
+/*
+ * NodeComm.cpp - Library for Simple Node to Node Communication via 8P Port
+ * Created By Adam Francey, May 19, 2017
+ * Released for IU Summer Camp
+ * Philip Beesley Architect Inc. / Living Architecture Systems Group
+ */
+
+
 #include "NodeComm.h"
-//#include "Adafruit_Neopixel.h"
 
+NodeComm::NodeComm(){
 
-NodeComm::NodeComm(){}
-void NodeComm::initComm(){
   pinMode(pins[BACK][GND], OUTPUT);
   pinMode(pins[FRONT][GND], OUTPUT);
   digitalWrite(pins[BACK][GND],LOW);
   digitalWrite(pins[FRONT][GND],LOW);
 
   //Serial2.begin
+  
 }
 
 int NodeComm::checkComm(int source){

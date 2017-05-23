@@ -1,25 +1,57 @@
+/*
+ * Node.ino - Sample Usage Code for Dendrite
+ * Created By Adam Francey, May 23, 2017
+ * Collaborated with Kevin Lam
+ * Released for IU Summer Camp
+ * Philip Beesley Architect Inc. / Living Architecture Systems Group
+ */
+
 #include "NodeComm.h"
+#include "JackPlateChain.h"
 
-int FORWARD = 0;
-int BACKWARD = 1;
+#define FORWARD                 0     // Port connected to Node/Dendrite to send instructions to
+#define BACKWARD                1     // Port connected to Node/Dendrite to receive instructions from
+#define NumJackPlatesOnChain    1     // The number of jack plates chained together
+#define JackPlatePort           0     // The port in which the chain of jack plates is plugged into
 
-// the number of jack plates chained together
-int NumJackPlatesOnChain = 1;
+JackPlateChain chain(JackPlatePort); // Initialize a chain of jack plates on port 0
 
-// the port the the chain of jack plates is plugged into
-int JackPlatePort = 0;
+NodeComm comms; // Initialize inter-node communication object
 
-// instantiate a chain of jack plates on port 0
-JackPlateChain chain(JackPlatePort);
+// Code inside setup() runs once when the Teensy powers on
+void setup() {
 
-// instantiate inter-node communication object
-NodeComm comms;
+  // Start serial communication for USB debugging
+  Serial.begin(57600);
+  Serial.println("Serial communication started");
+  
+}
 
-// sample code that could go inside loop()
+// Code inside loop() repeats until the Teensy powers off
+void loop() {
+
+  if (chain.checkIRSensorActivated(0) || chain.checkIRSensorActivated(1) || 
+  chain.checkIRSensorActivated(2) || chain.checkIRSensorActivated(3))
+  {
+    comms.sendComm(FORWARD, 1);
+    chain.propogateAllActuators(0);
+    comms.sendComm(FORWARD, 0);
+  }
+  if (comms.checkComm(BACKWARD)){
+    delay(4000);
+    comms.sendComm(FORWARD, 1);
+    chain.propogateAllActuators(0);
+    comms.sendComm(FORWARD, 0);
+  }
+
+  //sampleUsage();
+  
+}
+
 void sampleUsage(){
 
-  // loop through each plate
-  // check IR sensor, activate SMA, report back with serial USB
+  // Loop through each plate
+  // Check IR sensor, activate SMA, report back with serial USB
   for (int plate = 0; plate < NumJackPlatesOnChain; plate++){
 
     // example: checking if a sensor has been triggered
@@ -56,31 +88,12 @@ void sampleUsage(){
   }
 
   // send a LOW signal to the previous node
-  Serial.println("Sending LOW signal to previous node")
+  Serial.println("Sending LOW signal to previous node");
   comms.sendComm(BACKWARD,LOW);
 
   // send a HIGH singal to the next node
   Serial.println("Sending HIGH signal to next node");
-  comms.sendComm(FOWARD, HIGH);
+  comms.sendComm(FORWARD, HIGH);
   
   
-}
-
-// code inside setup() runs once when the Teensy powers on
-void setup() {
-
-  // start serial communication for USB debugging
-  Serial.begin(57600);
-  Serial.println("Serial communication started")
-  
-  //initialize inter-node communication
-  comms.initComm();
-
-}
-
-// code inside loop() repeats until the Teensy powers off
-void loop() {
-
-  sampleUsage();
-
 }
