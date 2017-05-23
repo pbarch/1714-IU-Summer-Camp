@@ -39,7 +39,7 @@ void JackPlateChain::propogateAllActuators(float successiveTime){
     }
     delay(TIME_ON);
     digitalWrite(port_pin[initializedPort][i], LOW);
-    delay(successiveTime);
+    delay((int)successiveTime*1000);
   }
   
 }

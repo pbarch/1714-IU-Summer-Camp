@@ -10,9 +10,9 @@
 
 // Pin Mappings for Node 3.2, Index starting at 0. I.E. Pin number 1 on P0 Port is port_pin[0][0]
 const int port_pin[4][8] = {{3,  4,  5, 20, A16, A11, A2, A3},
-                                       {25, 32, 6, 21, A17, A13, A15, A20},
-                                       {9, 10, 22, 23,  14,  A1, A18, A19},
-                                       {7,  8,  6, 11,  12,  13, 18, 19}};
+                            {25, 32, 6, 21, A17, A13, A15, A20},
+                            {9, 10, 22, 23,  14,  A1, A18, A19},
+                            {7,  8,  6, 11,  12,  13, 18, 19}};
 
 
 class JackPlateChain { //Class to dictate behaviour of daisy-chained Jack Plates
@@ -25,6 +25,9 @@ class JackPlateChain { //Class to dictate behaviour of daisy-chained Jack Plates
     int previousTimeSinceActuation[4];  //Holder for last time actuator was on
     int currentTime;                    //Holder for current time
 
+    //Checks if time from last actuation of position number has exceeded restingDelay
+    bool hasRestTimeElapsed(int actuatorNumber);
+    
   public:
 
     //Intialize object to corresponding to appropriate port on Node
@@ -41,39 +44,7 @@ class JackPlateChain { //Class to dictate behaviour of daisy-chained Jack Plates
 
     //Takes position number of Jack Plate/IRSensor, returns raw value from IR Sensor. Sensor Number 1 corresponds to first Jack Plate connected to Node, and so on...
     int rawIRSensorValue(int sensorNumber);
-
-    //Checks if time from last actuation of position number has exceeded restingDelay
-    bool hasRestTimeElapsed(int actuatorNumber);
-
     
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 #endif
