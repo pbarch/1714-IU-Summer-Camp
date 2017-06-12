@@ -62,7 +62,7 @@ bool JackPlateChain::checkIRSensorActivated(int sensorNumber){
   sensorNumber += 3; //For proper pin mapping. I.E. First sensor plugged in is pin number 5 on the port. Pin number 5 has an index of 4.
 
   //Checks if IR Sensor is triggered
-  if (analogRead(port_pin[initializedPort][sensorNumber] > PROXIMITY_RANGE)){
+  if (analogRead(port_pin[initializedPort][sensorNumber]) > PROXIMITY_RANGE){
       
       return true;
       

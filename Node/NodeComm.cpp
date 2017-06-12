@@ -11,7 +11,11 @@
 NodeComm::NodeComm(){
 
   pinMode(pins[BACKWARD][GND], OUTPUT);
+  pinMode(pins[BACKWARD][TX], OUTPUT);
+  pinMode(pins[BACKWARD][RX], INPUT);
   pinMode(pins[FORWARD][GND], OUTPUT);
+  pinMode(pins[FORWARD][TX], OUTPUT);
+  pinMode(pins[FORWARD][RX], INPUT);
   digitalWrite(pins[BACKWARD][GND],LOW);
   digitalWrite(pins[FORWARD][GND],LOW);
 

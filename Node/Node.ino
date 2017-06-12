@@ -12,7 +12,8 @@
 // If the system is wired according to specification you will not need to change these
 #define FORWARD                 0     // Port connected to Node/Dendrite to send instructions to
 #define BACKWARD                1     // Port connected to Node/Dendrite to receive instructions from
-#define JackPlatePort           0     // The port in which the chain of jack plates is plugged into
+#define JackPlatePort           0
+// The port in which the chain of jack plates is plugged into
 
 // change according to the number of Jack Plates in the chain
 #define NumJackPlatesOnChain    1     // The number of jack plates chained together
@@ -32,10 +33,9 @@ void setup() {
 
 // Code inside loop() repeats until the Teensy powers off
 void loop() {
-
   //Check all IRSensors on Jack Plates for detection
-  if (chain.checkIRSensorActivated(0) || chain.checkIRSensorActivated(1) || 
-  chain.checkIRSensorActivated(2) || chain.checkIRSensorActivated(3))
+  if (chain.checkIRSensorActivated(1) || chain.checkIRSensorActivated(2) || 
+  chain.checkIRSensorActivated(3) || chain.checkIRSensorActivated(4))
   {
     comms.sendComm(FORWARD, 1);   //Sends communication to Node connected to Port 1
     chain.propogateAllActuators(0);
@@ -53,7 +53,7 @@ void loop() {
     
   }
 
-
+  delay(100);
   //sampleUsage();    //Remove initial forward brackets (//) to use function
   
 }
